@@ -17,8 +17,6 @@ def initialize_session_state():
     with col2:
         st.title("Nav Itzamna Chat")
 
-      
-    #files = ["temp", "test-vector-index"]  # Lista de nombres de archivos disponibles
     files = get_databases()
     selected_file = st.selectbox("Selecciona un conjunto de archivos para iniciar la conversación", files)
 
@@ -29,7 +27,6 @@ def initialize_session_state():
 
     if st.session_state['bd_seleccionada'] != selected_file:
         st.session_state['bd_seleccionada'] = selected_file
-        st.session_state['generated'] = ["Preguntame sobre el conjunto de documentos seleccionado 🤗"]
     
     if 'history' not in st.session_state:
         st.session_state['history'] = []
@@ -42,7 +39,7 @@ def initialize_session_state():
 
 
 def get_databases():
-    endpoint_url = config["api"]["endpoint"] + config["api"]["content"] #"http://localhost:5000/api/question"  # Cambia esto a tu endpoint real
+    endpoint_url = config["api"]["endpoint"] + config["api"]["content"] 
     print(endpoint_url)
      
     response = requests.get(endpoint_url)
@@ -56,7 +53,7 @@ def get_databases():
 
 
 def get_response(question, identifier):
-    endpoint_url = config["api"]["endpoint"] + config["api"]["question"] #"http://localhost:5000/api/question"  # Cambia esto a tu endpoint real
+    endpoint_url = config["api"]["endpoint"] + config["api"]["question"]
     print(endpoint_url)
     data = {"pregunta": question, "identificador": identifier}
     print(data)
@@ -88,10 +85,10 @@ def main():
     
     if st.session_state['generated']:
         with reply_container:
-            message(st.session_state["generated"][0], key=str(0), avatar_style="fun-emoji")
-            for i in range(len(st.session_state['past'])):
-                message(st.session_state["past"][i], is_user=True, key=str(i) + '_user', avatar_style="thumbs")
-                message(st.session_state["generated"][i+1], key=str(i+1), avatar_style="fun-emoji")
+            for i in range(len(st.session_state['generated'])):
+                message(st.session_state["generated"][i], key=str(i), avatar_style="fun-emoji")
+                if(i < len(st.session_state["past"])):
+                    message(st.session_state["past"][i], is_user=True, key=str(i) + '_user', avatar_style="thumbs")
         
 
 if __name__ == "__main__":
