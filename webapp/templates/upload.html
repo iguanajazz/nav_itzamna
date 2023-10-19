@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Nav Itzamna - Carga Archivos</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='nav_itzamna.ico') }}">
+</head>
+<body>
+    <div class="container">
+        <img class="center-image" src="{{ url_for('static', filename='images/logo_nav_itzamna .png') }}" alt="Nav Itzamna Logo" width="192" height="192"/>
+        <h1>Nav Itzamna</h1>
+        <h2>Carga de Archivos PDF</h2>
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul>
+                {% for category, message in messages  %}
+                    <li class="{{ category }}">{{ message }}</li>
+                {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <div class="content">
+            <form method="POST" enctype="multipart/form-data">
+                <input type="text" name="identificador" class="input-field" placeholder="Identificador" required>
+                <br>
+                <input type="file" name="pdf_files" accept=".pdf" class="input-field" multiple required>
+                <br>
+                <input type="checkbox" name="confirmation" value="yes"> Confirmar agregar a la carpeta existente (si existe)
+                <br>
+                <br>
+                <button type="submit" class="button">Cargar PDF</button>
+            </form>
+        </div>
+        {% if db_name %}
+            <div class="col-md-6 mx-auto text-center"></div>
+                <br>
+                <br>
+                <button id="generatedb" class="button">Agregar archivos a base de datos {{ db_name }}</button>
+            
+                <!-- Agrega un elemento para mostrar el resultado -->
+                <div id="resultado"></div>
+            </div>
+
+            <script>
+            $(document).ready(function() {
+                $("#generatedb").click(function() {
+                    var db_name = "{{ db_name }}";
+                    var confirmation = "{{ confirmation }}"
+                    document.getElementById("generatedb").disabled = true;
+                    
+                    // usa AJAX para ejecutar la función en segundo plano
+                    $.ajax({
+                        type: "POST",
+                        url: "/add-to-db",
+                        data: { db_name: db_name, confirmation: confirmation },
+                        success: function(data) {
+                            $("#resultado").html("Los documentos se están agregando a {{db_name}}.");
+                        }
+                    });
+                });
+            });
+            </script>
+
+        {% endif %} 
+    </div>
+</body>
+</html>

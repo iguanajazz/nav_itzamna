@@ -1,0 +1,4 @@
+api:
+  endpoint: 'http://localhost:5000'
+  content: '/api/content'
+  question: '/api/question'

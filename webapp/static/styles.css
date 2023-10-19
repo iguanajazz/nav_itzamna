@@ -1,0 +1,91 @@
+/* styles.css */
+
+/* Estilos generales */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #fff; /* Fondo blanco */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    background-color: #f5f5f5; /* Fondo gris claro */
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos para el título */
+h1 {
+    color: #0077cc; /* Texto azul */
+}
+
+/* Estilos para el contenido */
+.content {
+    margin-top: 20px;
+}
+
+/* Estilos para campos de captura */
+.input-field {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 16px;
+}
+
+/* Estilos para botones */
+.button {
+    background-color: #0077cc; /* Fondo azul */
+    color: #fff; /* Texto blanco */
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button:hover {
+    background-color: #0055aa; /* Cambio de color al pasar el ratón */
+}
+
+/* Imagen central */
+.center-image {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* Estilos para mensajes flash */
+.flash {
+    margin-top: 20px;
+    padding: 10px;
+    border-radius: 4px;
+    font-size: 16px;
+    list-style-type: none;
+}
+
+.flash.error {
+    background-color: #ffdddd; /* Fondo rojo claro para mensajes de error */
+    color: #d8000c; /* Texto rojo oscuro para mensajes de error */
+}
+
+.flash.success {
+    background-color: #d4edda; /* Fondo verde claro para mensajes de éxito */
+    color: #155724; /* Texto verde oscuro para mensajes de éxito */
+}
+
+.flash.warning {
+    background-color: #fff3cd; /* Fondo amarillo claro para mensajes de advertencia */
+    color: #856404; /* Texto amarillo oscuro para mensajes de advertencia */
+}
